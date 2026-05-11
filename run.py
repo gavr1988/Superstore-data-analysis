@@ -21,5 +21,21 @@ def load_data(file_path):
     print ("n\Trying again with latin1 encoding...")
     df = pd.read_csv(file_path, encoding='latin1')
     print ("File loaded successfully with latin 1 encoding.")
+    return df
 
-return df
+#cleaning the column names
+
+def clean_column_names(df):
+    print ("Column names before cleaning:")
+    print(df.columns)
+
+    df.columns = (
+        df.columns.str.strip()
+        .str.lower()
+        .str.replace(" ", "_")
+        .str.replace("-","_")
+    )
+    print ("column names after cleaning:")
+    print (df.columns)
+
+    return df
