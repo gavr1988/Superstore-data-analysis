@@ -9,7 +9,7 @@ cleaned_file_path = "Superstore-data-cleaned.csv"
 
 def load_data(file_path):
 
-#loading the raw data
+    #loading the raw data
     try:
         df = pd.read_csv(file_path, encoding="utf-8")
         print("File loaded successfully with UTF-8 encoding.")
@@ -18,10 +18,19 @@ def load_data(file_path):
         print("Error message:")
         print (error)
 
-    print ("n\Trying again with latin1 encoding...")
+    print ("\nTrying again with latin1 encoding...")
     df = pd.read_csv(file_path, encoding='latin1')
     print("File loaded successfully with latin1 encoding.")
+
+    print("Finished load_data()")
+    print(f"Rows loaded: {df.shape[0]}")
+    print(f"Columns loaded: {df.shape[1]}")
+    print("First 5 rows:")
+    print(df.head())
+
     return df
+
+df = load_data(raw_file_path)
 
 #cleaning the column names
 
@@ -43,6 +52,6 @@ def clean_column_names(df):
 #Check data types before transformation
 def check_and_transform_data_types(df):
     print("\nData types before transformation")
-    print("df.dtypes")
+    print(df.dtypes)
           
 
