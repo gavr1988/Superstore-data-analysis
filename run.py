@@ -189,3 +189,14 @@ import numpy as np
 
 print("\n===Numpy Exploration of Cleaned Data ---")
 
+#Investigating the main numerical columns 
+#these are sales, quantity, discount and profit
+
+#creating a numpy array for each numerical column
+sales = df["sales"].to_numpy()
+quantity = df["quantity"].to_numpy()
+discount = df["discount"].to_numpy()
+profit = df["profit"].to_numpy()
+
+#calculating the key statistics for each column
+
