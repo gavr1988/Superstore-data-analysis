@@ -23,10 +23,19 @@ def load_data(file_path):
     print("File loaded successfully with latin1 encoding.")
 
     print("Finished load_data()")
+    
     print(f"Rows loaded: {df.shape[0]}")
+    
     print(f"Columns loaded: {df.shape[1]}")
+    
     print("First 5 rows:")
     print(df.head())
+
+    print("\nData types when first loaded:")
+    print(df.dtypes)
+
+    print("\nSummary of numeric columns:")
+    print(df.describe())
 
     return df
 
