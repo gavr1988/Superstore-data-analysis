@@ -63,4 +63,54 @@ def check_and_transform_data_types(df):
     print("\nData types before transformation")
     print(df.dtypes)
           
+    #convert postal_code to string
+    df['postal_code'] = df['postal_code'].astype(str)
 
+    #Convert date columns from object to datetime
+    
+    df["order_date"] = pd.to_datetime(df["order_date"], format="%m/%d/%Y")
+    df["ship_date"] = pd.to_datetime(df["ship_date"], format="%m/%d/%Y")
+
+    print("\nData types after transformation:")
+    print(df.dtypes)
+
+    return df
+
+#Check for missing values in each column
+def check_missing_values(df):
+    print("\nMissing values in each column:")
+    print(df.isnull().sum())
+
+    return df
+
+#Check for duplicate rows
+def check_duplicate_rows(df):
+    print("\nNumber of duplicate rows:")
+    print (df.duplicated().sum())
+
+    return df
+
+#Check that the shipping date is not before the order date
+def check_shipping_dates(df):
+    invalid_dates = df[df["ship_date"] < df["order_date"]]
+    print("\nInvalid shipping dates (before order date):")
+    print("\nRows where ship_date is before order_date")
+    print(len(invalid_dates))
+
+    return df
+
+#Check whether key numeric columns contain sensible values
+def check_numeric_values(df):
+    print("\nNumeric summary:")
+    print(df[["sales", "quantity", "discount", "profit"]].describe())
+
+    print("\nRows with sales <= 0:")
+    print((df["sales"] <= 0).sum())
+
+    print("\nRows with quantity <= 0:")
+    print((df["quantity"] <= 0).sum())
+
+    print("\nRows with discount outside 0 to 1:")
+    print(((df["discount"] < 0) | (df["discount"] > 1)).sum())
+
+    return df
