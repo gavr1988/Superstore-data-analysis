@@ -114,3 +114,25 @@ def check_numeric_values(df):
     print(((df["discount"] < 0) | (df["discount"] > 1)).sum())
 
     return df
+
+# running the functions
+
+df = clean_column_names(df)
+df = check_and_transform_data_types(df)
+df = check_missing_values(df)
+df = check_duplicate_rows(df)
+df = check_shipping_dates(df)
+df = check_numeric_values(df)
+
+print("\nFinal cleaned dataset shape:")
+print(df.shape)
+
+print("\nFinal column names:")
+print(df.columns)
+
+print("\nFinal data types:")
+print(df.dtypes)
+
+df.to_csv(cleaned_file_path, index=False)
+
+print(f"\nCleaned file saved as: {cleaned_file_path}")
