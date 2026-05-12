@@ -16,11 +16,11 @@ def load_data(file_path):
     except UnicodeDecodeError as error:
         print("UTF-8 failed.")
         print("Error message:")
-    print (error)
+        print (error)
 
     print ("n\Trying again with latin1 encoding...")
     df = pd.read_csv(file_path, encoding='latin1')
-    print ("File loaded successfully with latin 1 encoding.")
+    print("File loaded successfully with latin1 encoding.")
     return df
 
 #cleaning the column names
@@ -39,3 +39,10 @@ def clean_column_names(df):
     print (df.columns)
 
     return df
+
+#Check data types before transformation
+def check_and_transform_data_types(df):
+    print("\nData types before transformation")
+    print("df.dtypes")
+          
+
