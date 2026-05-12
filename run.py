@@ -115,6 +115,35 @@ def check_numeric_values(df):
 
     return df
 
+#Checking for outliers
+def check_outliers(df):
+    print("\n--- Checking for Outliers---")
+    numeric_columns = ["sales", "quantity", "discount", "profit"]
+
+    for column in numeric_columns: 
+        print(f"\nChecking column: {column}")
+        q1 = df[column].quantile(0.25)
+        q3 = df[column].quantile(0.75)
+        iqr= q3-q1
+        
+        lower_limit = q1 - 1.5*iqr
+        upper_limit = q3 + 1.5*iqr
+
+        outliers = df[(df[column] < lower_limit) | (df[column] > upper_limit)]
+
+        print(f"Q1: {q1}")
+        print(f"Q3: {q3}")
+        print(f"IQR: {iqr}")
+        print(f"Lower limit: {lower_limit}")
+        print(f"Upper limit: {upper_limit}")
+        print(f"Number of possible outliers: {len(outliers)}")
+
+        if len(outliers) > 0:
+            print("Example possible outliers:")
+            print(outliers[[column]].head())
+
+    return df
+
 # running the functions
 
 df = clean_column_names(df)
@@ -123,6 +152,7 @@ df = check_missing_values(df)
 df = check_duplicate_rows(df)
 df = check_shipping_dates(df)
 df = check_numeric_values(df)
+df = check_outliers(df)
 
 print("\nFinal cleaned dataset shape:")
 print(df.shape)
