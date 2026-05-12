@@ -147,6 +147,35 @@ def check_outliers(df):
 
     return df
 
+#creating a numpy array for each numerical column
+    sales = df["sales"].to_numpy()
+    quantity = df["quantity"].to_numpy()
+    discount = df["discount"].to_numpy()
+    profit = df["profit"].to_numpy()
+
+#Creates a NumPy summary for one numeric column.
+def numpy_column_summary(df, column_name):
+   
+    values = df[column_name].to_numpy()
+
+    print(f"\n--- {column_name.title()} Analysis ---")
+
+    print("Mean:", np.mean(values))
+    print("Median:", np.median(values))
+    print("Standard deviation:", np.std(values))
+    print("Maximum:", np.max(values))
+    print("Minimum:", np.min(values))
+
+    print("\nPercentiles:")
+    print("25th percentile:", np.percentile(values, 25))
+    print("50th percentile:", np.percentile(values, 50))
+    print("75th percentile:", np.percentile(values, 75))
+    print("90th percentile:", np.percentile(values, 90))
+    print("95th percentile:", np.percentile(values, 95))
+    print("99th percentile:", np.percentile(values, 99))
+
+    return df
+
 # running the functions
 
 df = clean_column_names(df)
@@ -192,87 +221,13 @@ print("\n===Numpy Exploration of Cleaned Data ---")
 #Investigating the main numerical columns 
 #these are sales, quantity, discount and profit
 
-#creating a numpy array for each numerical column
-sales = df["sales"].to_numpy()
-quantity = df["quantity"].to_numpy()
-discount = df["discount"].to_numpy()
-profit = df["profit"].to_numpy()
 
-#calculating the key statistics for each column
 
-#1. Sales
+# NumPy exploratory analysis
 
-print("\n--- Sales Analysis ---")
-
-print ("Mean sales:", np.mean(sales))
-print ("Median sales:", np.median(sales))
-print ("Standard deviation of sales:", np.std(sales))
-print ("Maximum sales", np.max(sales))
-print ("Minimum sales",np.min(sales))
-
-    #calculating sales percentiles to help understand the spread of values
-
-print ("\nSales Percentiles:")
-
-print("25th percentile:", np.percentile(sales, 25))
-print("50th percentile:", np.percentile(sales, 50))
-print("75th percentile:", np.percentile(sales, 75))
-print("90th percentile:", np.percentile(sales, 90))
-print("95th percentile:", np.percentile(sales, 95))
-print("99th percentile:", np.percentile(sales, 99))
-
-#2. Quantity
-
-print("\n--- Quantity Analysis ---")
-
-print ("Mean quantity:", np.mean(quantity))
-print ("Median quantity:", np.median(quantity))
-print ("Standard deviation of quantity:", np.std(quantity))
-print ("Maximum quantity", np.max(quantity))
-print ("Minimum quantity",np.min(quantity))
-
-#calculating Quantity percentiles to help understand the spread of values
-
-print ("\nQuantity Percentiles:")
-
-print("25th percentile:", np.percentile(quantity, 25))
-print("50th percentile:", np.percentile(quantity, 50))
-print("75th percentile:", np.percentile(quantity, 75))
-print("90th percentile:", np.percentile(quantity, 90))
-print("95th percentile:", np.percentile(quantity, 95))
-print("99th percentile:", np.percentile(quantity, 99))
-
-#3. Discount
-print("\n--- Discount Analysis ---")
-print ("Mean discount:", np.mean(discount))
-print ("Median discount:", np.median(discount))
-print ("Standard deviation of discount:", np.std(discount))
-print ("Maximum discount", np.max(discount))
-print ("Minimum discount",np.min(discount))
-
-#calculating Discount percentiles to help understand the spread of values
-print ("\nDiscount Percentiles:")
-print("25th percentile:", np.percentile(discount, 25))
-print("50th percentile:", np.percentile(discount, 50))
-print("75th percentile:", np.percentile(discount, 75))
-print("90th percentile:", np.percentile(discount, 90))
-print("95th percentile:", np.percentile(discount, 95))
-print("99th percentile:", np.percentile(discount, 99))
-
-#4. Profit
-print("\n--- Profit Analysis ---")
-print ("Mean profit:", np.mean(profit))
-print ("Median profit:", np.median(profit))
-print ("Standard deviation of profit:", np.std(profit))
-print ("Maximum profit", np.max(profit))
-print ("Minimum profit",np.min(profit))
-
-#calculating Profit percentiles to help understand the spread of values
-print ("\nProfit Percentiles:")
-print("25th percentile:", np.percentile(profit, 25))
-print("50th percentile:", np.percentile(profit, 50))
-print("75th percentile:", np.percentile(profit, 75))
-print("90th percentile:", np.percentile(profit, 90))
-print("95th percentile:", np.percentile(profit, 95))
-print("99th percentile:", np.percentile(profit, 99))
-
+df = numpy_column_summary(df, "sales")
+df = numpy_column_summary(df, "quantity")
+df = numpy_column_summary(df, "profit")
+df = numpy_column_summary(df, "discount")
+df = numpy_column_summary(df, "shipping_days")
+df = numpy_column_summary(df, "profit_margin")
