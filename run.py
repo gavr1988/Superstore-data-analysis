@@ -200,7 +200,7 @@ print(df.dtypes)
 df["shipping_days"] = (df["ship_date"] - df["order_date"]).dt.days
 df["profit_margin"] = df["profit"] / df["sales"]
 
-print ("\nadded new calculaated columns:")
+print ("\nadded new calculated columns:")
 
 # Check that the new columns exist
 print("\nColumns after adding calculated columns:")
@@ -209,10 +209,7 @@ print(df.columns)
 print("\nPreview of calculated columns:")
 print(df[["order_date", "ship_date", "shipping_days", "sales", "profit", "profit_margin"]].head())
 
-# Save cleaned file AFTER adding calculated columns
-df.to_csv(cleaned_file_path, index=False)
 
-print(f"\nCleaned file saved as: {cleaned_file_path}")
 
 #Numpy exploration
 
@@ -231,3 +228,10 @@ df = numpy_column_summary(df, "profit")
 df = numpy_column_summary(df, "discount")
 df = numpy_column_summary(df, "shipping_days")
 df = numpy_column_summary(df, "profit_margin")
+
+#Visualising distributions
+
+# Save cleaned file AFTER adding calculated columns
+df.to_csv(cleaned_file_path, index=False)
+
+print(f"\nCleaned file saved as: {cleaned_file_path}")
