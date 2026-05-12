@@ -13,29 +13,30 @@ def load_data(file_path):
     try:
         df = pd.read_csv(file_path, encoding="utf-8")
         print("File loaded successfully with UTF-8 encoding.")
+    
     except UnicodeDecodeError as error:
         print("UTF-8 failed.")
         print("Error message:")
         print (error)
 
-    print ("\nTrying again with latin1 encoding...")
-    df = pd.read_csv(file_path, encoding='latin1')
-    print("File loaded successfully with latin1 encoding.")
+        print ("\nTrying again with latin1 encoding...")
+        df = pd.read_csv(file_path, encoding='latin1')
+        print("File loaded successfully with latin1 encoding.")
 
-    print("Finished load_data()")
+        print("Finished load_data()")
     
-    print(f"Rows loaded: {df.shape[0]}")
+        print(f"Rows loaded: {df.shape[0]}")
     
-    print(f"Columns loaded: {df.shape[1]}")
+        print(f"Columns loaded: {df.shape[1]}")
     
-    print("First 5 rows:")
-    print(df.head())
+        print("First 5 rows:")
+        print(df.head())
 
-    print("\nData types when first loaded:")
-    print(df.dtypes)
+        print("\nData types when first loaded:")
+        print(df.dtypes)
 
-    print("\nSummary of numeric columns:")
-    print(df.describe())
+        print("\nSummary of numeric columns:")
+        print(df.describe())
 
     return df
 
@@ -163,6 +164,28 @@ print(df.columns)
 print("\nFinal data types:")
 print(df.dtypes)
 
+
+# Add calculated columns
+df["shipping_days"] = (df["ship_date"] - df["order_date"]).dt.days
+df["profit_margin"] = df["profit"] / df["sales"]
+
+print ("\nadded new calculaated columns:")
+
+# Check that the new columns exist
+print("\nColumns after adding calculated columns:")
+print(df.columns)
+
+print("\nPreview of calculated columns:")
+print(df[["order_date", "ship_date", "shipping_days", "sales", "profit", "profit_margin"]].head())
+
+# Save cleaned file AFTER adding calculated columns
 df.to_csv(cleaned_file_path, index=False)
 
 print(f"\nCleaned file saved as: {cleaned_file_path}")
+
+#Numpy exploration
+
+import numpy as np
+
+print("\n===Numpy Exploration of Cleaned Data ---")
+
