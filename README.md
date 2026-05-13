@@ -49,3 +49,87 @@ The project follows these main stages:
 10. Explore the data using NumPy
 11. Visualise key finidngs using Matplotlib
 12. Export the cleaned dataset
+
+# Data Cleaning Steps
+1. Loading the Data set:
+The dataset is loaded using pandas.read_csv()
+
+The script first attempts to load the file using UTF-8 encoding. If this fails, it attempts to load the file using latin1 encoding.
+
+2. Column Name Cleaning:
+Column names are cleaned by 
+a. removing extra spaces
+b. converting names to lowercase
+c. replacing spaces with underscores
+d. replacing hyphens with underscores
+
+for example: 
+Order Date
+becomes
+order_date
+
+3. Transforming Data Types:
+The script converts important columns into more suitable data types.
+The postal_code column is converted to a string because postal codes should not be treated as numbers.
+The date columns are converted to datetime format:
+
+order_date
+ship-date
+
+This allows the script to calculate the number of days between the orderdate and the shipping date. 
+
+4. Checking Missing Values
+The script checks each column for missing values using
+
+df.isnull().sum()
+
+This helps identify whethere any columns contains incomplete data
+
+5. Checking Duplicate Rows
+
+The script checks for duplicate rows using
+
+df.duplicated().sum()
+
+Duplicate records could affect the accuracy of the analysis so this is a quality assurance step. 
+
+6. Checking Shipping Dates
+
+The script checks whether any orders have a shipping date before the order date.
+This would indicate an invalid date entry.
+
+7. Checking Numeric Values
+
+The script checks whether the main numeric columns contain sensible values.
+
+The columns checked are:
+sales
+quantity
+discount
+profit
+
+The script checks for:
+
+sales values less than or equal to zero
+quantity values less than or equal to zero
+discount values outside the range 0 to 1
+
+8. Checking for Outliers
+
+The script uses the IQR method to identify possible outliers
+
+The columns checked are
+sales
+quantity
+discount
+profit
+
+The IQR method calculates:
+IQR = Q3-Q1
+
+Values below the lower limit or above the upper limit are flagged as possible outliers. 
+
+Outliers are not being automatically removed because they may represent genuine business activity, such as very large orders or unusually high losses.
+
+
+
