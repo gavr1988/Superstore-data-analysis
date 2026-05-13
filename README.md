@@ -154,3 +154,40 @@ df["profit_margin"] = df["profit"] / df["sales"]
 This calculates the profit made as a proportion of sales.
 
 Profit margin is useful because it gives a better measure of profitability than profit alone, for example, a large order may have high profit but a low profit margin.
+
+# Numpy Exploration
+
+NumPy is used to explore the main numerical columns in the cleaned dataset.
+
+The columns analysed are:
+sales
+quantity
+profit
+discount
+shipping_days
+profit_margin
+
+For each column, the script calculates:
+mean
+median
+standard deviation
+minimum value
+maximum value
+25th percentile
+50th percentile
+75th percentile
+90th percentile
+95th percentile
+99th percentile
+
+This helps describe the spread of values and identify whether the data contains unusual or extreme values.
+
+# Why were percentiles used?
+
+Percentiles help describe the distribution of the data without relying only on the mean.
+
+This is useful because columns such as sales and profit may contain outliers.
+
+For example, a small number of very large sales could increase the mean, making it less representative of a typical order.
+
+Percentiles help show what most orders look like and where unusually large or small values begin.
