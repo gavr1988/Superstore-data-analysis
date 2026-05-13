@@ -229,8 +229,6 @@ df = numpy_column_summary(df, "profit_margin")
 #Visualising distributions using Matplotlib
 #Plotting Sales Distribution
 
-print ("\n--- Visualising Sales Distribution ---")
-
 plt.figure(figsize=(10, 6))
 
 plt.hist(df["sales"], bins=50)
@@ -259,7 +257,38 @@ plt.legend()
 
 plt.show()
 
+#Loss rate by discount level
+#showing what percentage of orders at each discount level resulted in a loss
 
+loss_rate_by_discount = df.groupby("discount")["profit"].apply(
+    lambda x: (x < 0).mean() * 100
+)
+
+plt.figure(figsize=(10, 6))
+
+plt.bar(loss_rate_by_discount.index, loss_rate_by_discount.values)
+
+plt.title("Loss Rate by Discount Level")
+plt.xlabel("Discount")
+plt.ylabel("Loss-Making Orders (%)")
+
+plt.show()
+
+#Average time to ship by different methods
+
+shipping_by_mode = df.groupby("ship_mode")["shipping_days"].mean()
+
+plt.figure(figsize=(10, 6))
+
+plt.bar(shipping_by_mode.index, shipping_by_mode.values)
+
+plt.title("Average Time to ship by different methods")
+plt.xlabel("Ship Mode")
+plt.ylabel("Average Shipping Days")
+
+plt.xticks(rotation=30)
+
+plt.show()
 
 # Save cleaned file AFTER adding calculated columns
 df.to_csv(cleaned_file_path, index=False)
