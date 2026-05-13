@@ -34,3 +34,18 @@ The dataset contains sales order information, including fields such as
 - Product Category
 - Region
 - Customer Information
+
+# Project Structure
+The project follows these main stages:
+1. Load the raw dataset
+2. Clean the column names
+3. Convert the data types
+4. Check for missing values
+5. Check for duplicate rows
+6. Validate shipping dates
+7. Check numeric values
+8. Identify possible outliers
+9. Add calculated columns
+10. Explore the data using NumPy
+11. Visualise key finidngs using Matplotlib
+12. Export the cleaned dataset
