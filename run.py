@@ -245,6 +245,20 @@ plt.legend()
 
 plt.show()
 
+#Profit Distribution
+plt.figure(figsize=(10, 6))
+
+plt.hist(df["profit"], bins=50)
+
+plt.axvline(0, linestyle="--", label="Break-even point")
+
+plt.title("Distribution of Profit")
+plt.xlabel("Profit")
+plt.ylabel("Number of Orders")
+plt.legend()
+
+plt.show()
+
 
 
 # Save cleaned file AFTER adding calculated columns
