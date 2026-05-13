@@ -1,6 +1,5 @@
 # Superstore-data-analysis
 
-
 # Project Overview
 
 This project uses Python to clean, explore and visualise a Superstore's Sales dataset.
@@ -236,3 +235,39 @@ This project helps answer the following questions:
 6. How long does shipping usually take?
 7. Which shipping methods have the shortest average shipping time?
 8. How profitable are orders relative to their sales value?
+
+# Output
+
+The final cleaned dataset is saved as:
+
+Superstore-data-cleaned.csv
+
+This file includes the original cleaned columns plus the new calculated columns:
+shipping_days
+profit_margin
+
+This cleaned file can be used for further analysis in Python, Tableau, Excel or another visualisation tool.
+
+# How to Run the Script
+
+Make sure the raw dataset is saved in the same folder as the Python script.
+
+Ensure the file is named:
+Superstore-data.csv
+
+Install the required libraries if needed:
+pip install pandas numpy matplotlib
+
+Run the Python script.
+
+The cleaned file will be created as:
+
+Superstore-data-cleaned.csv
+
+# Summary
+
+This project demonstrates a complete data analysis workflow.
+
+The data is cleaned and validated using pandas, explored numerically using NumPy, and visualised using Matplotlib.
+
+The analysis focuses on understanding sales, profit, discounting, shipping time and profitability patterns in the Superstore dataset.
