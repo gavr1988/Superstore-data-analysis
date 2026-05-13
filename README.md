@@ -131,5 +131,26 @@ Values below the lower limit or above the upper limit are flagged as possible ou
 
 Outliers are not being automatically removed because they may represent genuine business activity, such as very large orders or unusually high losses.
 
+# Calculated Columns
 
+Two new calculated columns are added to the data set. 
 
+1. Shipping Days
+
+This is calculated by:
+
+shipping_days = ship_date - order_date
+
+This calculates the number of days it takes from ordering to dispatch
+
+This can be used to analyse delivery performance by shipping method
+
+2. Profit Margin
+
+This is calculated by: 
+
+df["profit_margin"] = df["profit"] / df["sales"]
+
+This calculates the profit made as a proportion of sales.
+
+Profit margin is useful because it gives a better measure of profitability than profit alone, for example, a large order may have high profit but a low profit margin.
