@@ -191,3 +191,36 @@ This is useful because columns such as sales and profit may contain outliers.
 For example, a small number of very large sales could increase the mean, making it less representative of a typical order.
 
 Percentiles help show what most orders look like and where unusually large or small values begin.
+
+# Matplotlib Visualisations
+
+Matplotlib is used to visualise important findings from the Numpy Exploration
+
+1. Sales Distribution
+A histogram is beign used to show the distribution of sales values.
+
+The chart includes:
+a mean sales line
+a median sales line
+
+This helps show whether sales are evenly distributed or skewed by a small number of high-value orders.
+
+2. Profit Distribution
+A histogram is used to show the distribution of profit values.
+
+A break-even line is added at zero.
+
+Orders to the left of this line are loss-making orders, while orders to the right are profitable.
+
+3. Loss Rate by Discount Level
+
+A bar chart is used to show the percentage of loss-making orders at each discount level.
+
+This helps investigate whether higher discounts are associated with a greater chance of making a loss.
+
+4. Average Shipping Time by Ship Mode
+
+A bar chart is used to compare average shipping time across different shipping modes.
+
+This helps evaluate whether faster shipping methods are performing as expected.
+
