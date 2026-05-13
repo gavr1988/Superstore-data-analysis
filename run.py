@@ -147,12 +147,6 @@ def check_outliers(df):
 
     return df
 
-#creating a numpy array for each numerical column
-    sales = df["sales"].to_numpy()
-    quantity = df["quantity"].to_numpy()
-    discount = df["discount"].to_numpy()
-    profit = df["profit"].to_numpy()
-
 #Creates a NumPy summary for one numeric column.
 def numpy_column_summary(df, column_name):
    
