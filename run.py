@@ -219,9 +219,6 @@ print("\n===Numpy Exploration of Cleaned Data ---")
 #these are sales, quantity, discount and profit
 
 
-
-# NumPy exploratory analysis
-
 df = numpy_column_summary(df, "sales")
 df = numpy_column_summary(df, "quantity")
 df = numpy_column_summary(df, "profit")
@@ -229,7 +226,26 @@ df = numpy_column_summary(df, "discount")
 df = numpy_column_summary(df, "shipping_days")
 df = numpy_column_summary(df, "profit_margin")
 
-#Visualising distributions
+#Visualising distributions using Matplotlib
+#Plotting Sales Distribution
+
+print ("\n--- Visualising Sales Distribution ---")
+
+plt.figure(figsize=(10, 6))
+
+plt.hist(df["sales"], bins=50)
+
+plt.axvline(np.mean(df["sales"]), linestyle="--", label="Mean sales")
+plt.axvline(np.median(df["sales"]), linestyle="--", label="Median sales")
+
+plt.title("Distribution of Sales")
+plt.xlabel("Sales")
+plt.ylabel("Number of Orders")
+plt.legend()
+
+plt.show()
+
+
 
 # Save cleaned file AFTER adding calculated columns
 df.to_csv(cleaned_file_path, index=False)
