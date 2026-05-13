@@ -224,3 +224,15 @@ A bar chart is used to compare average shipping time across different shipping m
 
 This helps evaluate whether faster shipping methods are performing as expected.
 
+# Key Questions Explored
+
+This project helps answer the following questions:
+
+1. What does a typical sales value look like?
+2. Are sales values affected by extreme outliers?
+3. How widely does profit vary across orders?
+4. What percentage of orders are loss-making?
+5. Are higher discounts linked to more loss-making orders?
+6. How long does shipping usually take?
+7. Which shipping methods have the shortest average shipping time?
+8. How profitable are orders relative to their sales value?
