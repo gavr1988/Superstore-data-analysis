@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 #defining the file paths
 
 raw_file_path = "Superstore-data.csv"
-cleaned_file_path = "Superstore-data-cleaned.csv"
+cleaned_file_path = "superstore-data-cleaned.csv"
 
 #defining functions
 
