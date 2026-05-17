@@ -189,19 +189,18 @@ print(df.columns)
 print("\nFinal data types:")
 print(df.dtypes)
 
+#wrap this feature engineering step in a function
+def add_calculated_columns(df):
+    df["shipping_days"] = (df["ship_date"] - df["order_date"]).dt.days
+    df["profit_margin"] = df["profit"] / df["sales"]
+    print ("\nadded new calculated columns:")
+    # Check that the new columns exist
+    print("\nColumns after adding calculated columns:")
+    print(df.columns)
 
-# Add calculated columns
-df["shipping_days"] = (df["ship_date"] - df["order_date"]).dt.days
-df["profit_margin"] = df["profit"] / df["sales"]
-
-print ("\nadded new calculated columns:")
-
-# Check that the new columns exist
-print("\nColumns after adding calculated columns:")
-print(df.columns)
-
-print("\nPreview of calculated columns:")
-print(df[["order_date", "ship_date", "shipping_days", "sales", "profit", "profit_margin"]].head())
+    print("\nPreview of calculated columns:")
+    print(df[["order_date", "ship_date", "shipping_days", "sales", "profit", "profit_margin"]].head())
+    return df
 
 
 
@@ -212,6 +211,7 @@ print("\n===Numpy Exploration of Cleaned Data ---")
 #Investigating the main numerical columns 
 #these are sales, quantity, discount and profit
 
+df = add_calculated_columns(df)
 
 df = numpy_column_summary(df, "sales")
 df = numpy_column_summary(df, "quantity")
@@ -220,71 +220,82 @@ df = numpy_column_summary(df, "discount")
 df = numpy_column_summary(df, "shipping_days")
 df = numpy_column_summary(df, "profit_margin")
 
+
 #Visualising distributions using Matplotlib
-#Plotting Sales Distribution
 
-plt.figure(figsize=(10, 6))
+def plot_sales_distribution(df):
+    """Plot the distribution of sales with mean and median lines."""
+    plt.figure(figsize=(10, 6))
+    
+    plt.hist(df["sales"], bins=50)
+    
+    plt.axvline(np.mean(df["sales"]), linestyle="--", label="Mean sales")
+    plt.axvline(np.median(df["sales"]), linestyle="--", label="Median sales")
+    
+    plt.title("Distribution of Sales")
+    plt.xlabel("Sales")
+    plt.ylabel("Number of Orders")
+    plt.legend()
+    
+    plt.show()
 
-plt.hist(df["sales"], bins=50)
+def plot_profit_distribution(df):
+    """Plot the distribution of profit with break-even line."""
+    plt.figure(figsize=(10, 6))
+    
+    plt.hist(df["profit"], bins=50)
+    
+    plt.axvline(0, linestyle="--", label="Break-even point")
+    
+    plt.title("Distribution of Profit")
+    plt.xlabel("Profit")
+    plt.ylabel("Number of Orders")
+    plt.legend()
+    
+    plt.show()
 
-plt.axvline(np.mean(df["sales"]), linestyle="--", label="Mean sales")
-plt.axvline(np.median(df["sales"]), linestyle="--", label="Median sales")
+def plot_loss_rate_by_discount(df):
+    """Plot the percentage of loss-making orders at each discount level."""
+    loss_rate_by_discount = df.groupby("discount")["profit"].apply(
+        lambda x: (x < 0).mean() * 100
+    )
+    
+    plt.figure(figsize=(10, 6))
+    
+    plt.bar(loss_rate_by_discount.index, loss_rate_by_discount.values)
+    
+    plt.title("Loss Rate by Discount Level")
+    plt.xlabel("Discount")
+    plt.ylabel("Loss-Making Orders (%)")
+    
+    plt.show()
 
-plt.title("Distribution of Sales")
-plt.xlabel("Sales")
-plt.ylabel("Number of Orders")
-plt.legend()
+def plot_shipping_by_mode(df):
+    """Plot the average shipping days for each shipping method."""
+    shipping_by_mode = df.groupby("ship_mode")["shipping_days"].mean()
+    
+    plt.figure(figsize=(10, 6))
+    
+    plt.bar(shipping_by_mode.index, shipping_by_mode.values)
+    
+    plt.title("Average Time to ship by different methods")
+    plt.xlabel("Ship Mode")
+    plt.ylabel("Average Shipping Days")
+    
+    plt.xticks(rotation=30)
+    
+    plt.show()
 
-plt.show()
+# Call the visualization functions
+plot_sales_distribution(df)
+plot_profit_distribution(df)
+plot_loss_rate_by_discount(df)
+plot_shipping_by_mode(df)
 
-#Profit Distribution
-plt.figure(figsize=(10, 6))
-
-plt.hist(df["profit"], bins=50)
-
-plt.axvline(0, linestyle="--", label="Break-even point")
-
-plt.title("Distribution of Profit")
-plt.xlabel("Profit")
-plt.ylabel("Number of Orders")
-plt.legend()
-
-plt.show()
-
-#Loss rate by discount level
-#showing what percentage of orders at each discount level resulted in a loss
-
-loss_rate_by_discount = df.groupby("discount")["profit"].apply(
-    lambda x: (x < 0).mean() * 100
-)
-
-plt.figure(figsize=(10, 6))
-
-plt.bar(loss_rate_by_discount.index, loss_rate_by_discount.values)
-
-plt.title("Loss Rate by Discount Level")
-plt.xlabel("Discount")
-plt.ylabel("Loss-Making Orders (%)")
-
-plt.show()
-
-#Average time to ship by different methods
-
-shipping_by_mode = df.groupby("ship_mode")["shipping_days"].mean()
-
-plt.figure(figsize=(10, 6))
-
-plt.bar(shipping_by_mode.index, shipping_by_mode.values)
-
-plt.title("Average Time to ship by different methods")
-plt.xlabel("Ship Mode")
-plt.ylabel("Average Shipping Days")
-
-plt.xticks(rotation=30)
-
-plt.show()
+def save_cleaned_data(df, file_path):
+    """Save the cleaned dataframe to a CSV file."""
+    df.to_csv(file_path, index=False)
+    print(f"\nCleaned file saved as: {file_path}")
 
 # Save cleaned file AFTER adding calculated columns
-df.to_csv(cleaned_file_path, index=False)
-
-print(f"\nCleaned file saved as: {cleaned_file_path}")
+save_cleaned_data(df, cleaned_file_path)
