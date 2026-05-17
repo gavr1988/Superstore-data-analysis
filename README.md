@@ -4,7 +4,7 @@
 
 This project uses Python to clean, explore and visualise a Superstore's Sales dataset.
 
-The aim of the project is to prepare the dataset for further analysis by checking data quality, transforming key columns, creating new calculated fields, exploring numerical patterns using NumPy, and visualising important findings using Matplotlib.
+The aim of the project is to prepare the dataset for further analysis by checking data quality, transforming key columns, creating new calculated fields, exploring patterns using NumPy, and visualising findings using Matplotlib.
 
 The cleaned dataset is exported as a new CSV file called:
 Superstore-data-cleaned.csv
@@ -128,7 +128,7 @@ IQR = Q3-Q1
 
 Values below the lower limit or above the upper limit are flagged as possible outliers. 
 
-Outliers are not being automatically removed because they may represent genuine business activity, such as very large orders or unusually high losses.
+Outliers are not being automatically removed because they may represent different activity, such as very large orders or unusually high losses.
 
 # Calculated Columns
 
@@ -246,7 +246,7 @@ This file includes the original cleaned columns plus the new calculated columns:
 shipping_days
 profit_margin
 
-This cleaned file can be used for further analysis in Python, Tableau, Excel or another visualisation tool.
+This cleaned file can be used for further analysis in another visualisation tool.
 
 # How to Run the Script
 
